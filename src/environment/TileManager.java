@@ -117,7 +117,7 @@ public class TileManager {
 					
 					if(k != 2) {
 						if(mapTileNum[i][j] != -1) {
-							int theta = direction(mapTileNum[i][j]);
+							int theta = rotation(mapTileNum[i][j]);
 							int n = ((mapTileNum[i][j]) << 3);
 							n = (n >> 3);
 							BufferedImage tmp = tile[n].image;
@@ -148,7 +148,7 @@ public class TileManager {
 		}
 	}
 
-	public int direction(int n) {
+	public int rotation(int n) {
 		int ret = 0;
 		int tmp = ( n >> 29 );
 		switch(tmp) {
