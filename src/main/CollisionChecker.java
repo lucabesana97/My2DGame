@@ -20,9 +20,9 @@ public class CollisionChecker {
 			corner_1 = tmp.worldX + tmp.solidArea.x;
 			corner_2 = corner_1 + tmp.solidArea.width;
 			entityCol = (tmp.worldY + tmp.solidArea.y - tmp.speed)/gp.tileSize;
-			tileCheck_1 = (gp.tileM.mapTileNum[corner_1/gp.tileSize][entityCol] << 3) >> 3;
-			tileCheck_2 = (gp.tileM.mapTileNum[corner_2/gp.tileSize][entityCol] << 3) >> 3;
-			if((gp.tileM.tile[tileCheck_1].collision & 0b0010) == 0b0010 || (gp.tileM.tile[tileCheck_2].collision & 0b0010) == 0b0010) {
+			tileCheck_1 = gp.tileM.mapTileNum[corner_1/gp.tileSize][entityCol].getCollision();
+			tileCheck_2 = gp.tileM.mapTileNum[corner_2/gp.tileSize][entityCol].getCollision();
+			if((tileCheck_1 & 0b0010) == 0b0010 || (tileCheck_2 & 0b0010) == 0b0010) {
 				tmp.collisionOn = true;
 			}
 			break;
@@ -30,9 +30,9 @@ public class CollisionChecker {
 			corner_1 = tmp.worldX + tmp.solidArea.x;
 			corner_2 = corner_1 + tmp.solidArea.width;
 			entityCol = (tmp.worldY + tmp.solidArea.y + tmp.solidArea.height + tmp.speed)/gp.tileSize;
-			tileCheck_1 = (gp.tileM.mapTileNum[corner_1/gp.tileSize][entityCol] << 3) >> 3;
-			tileCheck_2 = (gp.tileM.mapTileNum[corner_2/gp.tileSize][entityCol] << 3) >> 3;
-			if((gp.tileM.tile[tileCheck_1].collision & 0b1000) == 0b1000 || (gp.tileM.tile[tileCheck_2].collision & 0b1000) == 0b1000) {
+			tileCheck_1 = gp.tileM.mapTileNum[corner_1/gp.tileSize][entityCol].getCollision();
+			tileCheck_2 = gp.tileM.mapTileNum[corner_2/gp.tileSize][entityCol].getCollision();
+			if((tileCheck_1 & 0b1000) == 0b1000 || (tileCheck_2 & 0b1000) == 0b1000) {
 				tmp.collisionOn = true;
 			}
 			break;
@@ -40,9 +40,9 @@ public class CollisionChecker {
 			corner_1 = tmp.worldY + tmp.solidArea.y;
 			corner_2 = corner_1 + tmp.solidArea.height;
 			entityCol = (tmp.worldX + tmp.solidArea.x - tmp.speed)/gp.tileSize;
-			tileCheck_1 = (gp.tileM.mapTileNum[entityCol][corner_1/gp.tileSize] << 3) >> 3;
-			tileCheck_2 = (gp.tileM.mapTileNum[entityCol][corner_2/gp.tileSize] << 3) >> 3;
-			if((gp.tileM.tile[tileCheck_1].collision & 0b0001) == 0b0001 || (gp.tileM.tile[tileCheck_2].collision & 0b0001) == 0b0001) {
+			tileCheck_1 = gp.tileM.mapTileNum[entityCol][corner_1/gp.tileSize].getCollision();
+			tileCheck_2 = gp.tileM.mapTileNum[entityCol][corner_2/gp.tileSize].getCollision();
+			if((tileCheck_1 & 0b0001) == 0b0001 || (tileCheck_2 & 0b0001) == 0b0001) {
 				tmp.collisionOn = true;
 			}
 
@@ -51,9 +51,9 @@ public class CollisionChecker {
 			corner_1 = tmp.worldY + tmp.solidArea.y;
 			corner_2 = corner_1 + tmp.solidArea.height;
 			entityCol = (tmp.worldX + gp.tileSize - tmp.solidArea.x + tmp.speed)/gp.tileSize;
-			tileCheck_1 = (gp.tileM.mapTileNum[entityCol][corner_1/gp.tileSize] << 3) >> 3;
-			tileCheck_2 = (gp.tileM.mapTileNum[entityCol][corner_2/gp.tileSize] << 3) >> 3;
-			if((gp.tileM.tile[tileCheck_1].collision & 0b0100) == 0b0100 || (gp.tileM.tile[tileCheck_2].collision & 0b100) == 0b0100) {
+			tileCheck_1 = gp.tileM.mapTileNum[entityCol][corner_1/gp.tileSize].getCollision();
+			tileCheck_2 = gp.tileM.mapTileNum[entityCol][corner_2/gp.tileSize].getCollision();
+			if((tileCheck_1 & 0b0100) == 0b0100 || (tileCheck_2 & 0b100) == 0b0100) {
 				tmp.collisionOn = true;
 			}
 			break;
