@@ -30,8 +30,8 @@ public class Player extends Entity{
 	}
 
 	public void setDefault(){
-		worldX = 12 * gp.tileSize *10 + 5;
-		worldY = 7 * gp.tileSize *10 + 5;
+		worldX = 11 * gp.tileSize * 10 + 5;
+		worldY = 7 * gp.tileSize * 10 + 5;
 		speed = 6;
 		dir = "down";
 		diagSpeed = speed * Math.sqrt(2)/2;
@@ -70,42 +70,73 @@ public class Player extends Entity{
 				dir = "still_r";
 		}
 
-		collisionOn = false;
+		setCollisionsOff();
 		gp.cCheck.checkTile(this, dir);
+		//gp.cCheck.checkObj(this, dir);
 		
-		if(collisionOn == false) {
-			switch (dir) {
-			case "up": 
+		switch (dir) {
+		case "up": 
+			if(collision_up == false) {
 				worldY -= speed;
-				break;
-			case "up_left": 
-				worldY -= diagSpeed;
-				worldX -= diagSpeed;
-				break;
-			case "up_right": 
-				worldY -= diagSpeed;
-				worldX += diagSpeed;
-				break;
-			case "down": 
-				worldY += speed;
-				break;
-			case "down_left": 
-				worldY += diagSpeed;
-				worldX -= diagSpeed;
-				break;
-			case "down_right": 
-				worldY += diagSpeed;
-				worldX += diagSpeed;
-				break;
-			case "left": 
-				worldX -= speed;
-				break;
-			case "right": 
-				worldX += speed;
-				break;
 			}
+			break;
+		case "up_left": 
+			if(collision_up == false && collision_left == false) {
+				worldY -= diagSpeed;
+				worldX -= diagSpeed;
+			} else if (collision_up == false) {
+				worldY -= diagSpeed / Math.sqrt(2);
+			} else if (collision_left == false) {
+				worldX -= diagSpeed / Math.sqrt(2);
+			}
+			break;
+		case "up_right": 
+			if(collision_up == false && collision_right == false) {
+				worldY -= diagSpeed;
+				worldX += diagSpeed;
+			} else if (collision_up == false) {
+				worldY -= diagSpeed / Math.sqrt(2);
+			} else if (collision_right == false) {
+				worldX += diagSpeed / Math.sqrt(2);
+			}
+			break;
+		case "down":
+			if(collision_down == false) {
+				worldY += speed;
+			}
+			break;
+		case "down_left": 
+			if(collision_down == false && collision_left == false) {
+				worldY += diagSpeed;
+				worldX -= diagSpeed;
+			} else if (collision_down == false) {
+				worldY += diagSpeed / Math.sqrt(2);
+			} else if (collision_left == false) {
+				worldX -= diagSpeed / Math.sqrt(2);
+			}
+			break;
+		case "down_right": 
+			if(collision_down == false && collision_right == false) {
+				worldY += diagSpeed;
+				worldX += diagSpeed;
+			} else if (collision_down == false) {
+				worldY += diagSpeed / Math.sqrt(2);
+			} else if (collision_right == false) {
+				worldX += diagSpeed / Math.sqrt(2);
+			}
+			break;
+		case "left": 
+			if(collision_left == false) {
+				worldX -= speed;
+			}
+			break;
+		case "right": 
+			if(collision_right == false) {
+				worldX += speed;
+			}
+			break;
 		}
-		
+
 		spriteCounter++;
 		if (spriteCounter > 10) {
 			if (spriteNumber < 6) {

@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import entity.Player;
 import environment.TileManager;
+import hud.*;
+import object.*;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -30,6 +32,9 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	public Player player = new Player(this, keyH);
 	public CollisionChecker cCheck = new CollisionChecker(this);
+	public AssetSetter aSetter = new AssetSetter(this);
+	public SuperObject[] obj = new SuperObject[10];
+	public Dialogue dial = new Dialogue(this);
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -37,6 +42,11 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+	}
+	
+
+	public void setUpGame() {
+		aSetter.setObject();
 	}
 
 	public void startGameThread() {
@@ -73,6 +83,8 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void update() {
 		player.update();
+		obj[0].update();
+		obj[1].update();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -81,8 +93,17 @@ public class GamePanel extends JPanel implements Runnable{
 		Graphics2D g2 = (Graphics2D) g;
 
 		tileM.draw(g2);
-		player.draw(g2);
-		
+		if(player.worldY > obj[0].objectY - tileSize/4) {
+			obj[0].draw(g2);
+			player.draw(g2);
+		} else {
+			player.draw(g2);
+			obj[0].draw(g2);
+		}
+		obj[1].draw(g2);
+		dial.draw(g2);
 		g2.dispose();
 	}
+
+
 }

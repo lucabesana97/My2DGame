@@ -34,7 +34,9 @@ public class TileManager {
 				tile[i] = new Tile();
 				tile[i].image = ImageIO.read(getClass().getResourceAsStream(str));
 			}
-			tile[58].collision = 0b0101;
+			for(int i = 54; i <= 69; i++) {
+				tile[i].collision = 0b1111;
+			}
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

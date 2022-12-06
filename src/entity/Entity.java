@@ -16,5 +16,12 @@ public class Entity {
 	public int spriteNumber = 1;
 	
 	public Rectangle solidArea;
-	public boolean collisionOn;
+	public boolean collision_right, collision_left, collision_up, collision_down;
+	
+	public void setCollisionsOff(){
+		collision_right = false;
+		collision_left = false;
+		collision_up = false;
+		collision_down = false;
+	}
 }
