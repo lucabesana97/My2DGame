@@ -10,8 +10,6 @@ import main.GamePanel;
 
 public class Obj_Araya extends SuperObject{
 
-	public int size = gp.tileSize * 7 / 8;
-	
 	public Obj_Araya(GamePanel gp){
 		this.gp = gp;
 		setDefault();
@@ -20,12 +18,13 @@ public class Obj_Araya extends SuperObject{
 	}
 
 	public void setDefault(){
-		objectX = (7 * 10 + 7) * gp.tileSize;
-		objectY = (6 * 10 + 4) * gp.tileSize;
+		objectX = (7 * 10 + 7) * gp.tileSize + gp.tileSize / 2;
+		objectY = (6 * 10 + 4) * gp.tileSize + gp.tileSize / 2;
 		screenX = objectX - gp.player.worldX + gp.player.screenX;
 		screenY = objectY - gp.player.worldY + gp.player.screenY;
 		picked = false;
 		consumed = false;
+		size = gp.tileSize * 7 / 8;
 	}
 
 	public void getObjectImage() {
@@ -48,10 +47,8 @@ public class Obj_Araya extends SuperObject{
 				&& objectX <= frameCenterX + gp.player.screenX + 2 * gp.tileSize
 				&& objectY <= frameCenterY + gp.player.screenY + 2 * gp.tileSize
 				&& objectY >= frameCenterY - gp.player.screenY - 2 * gp.tileSize) {
-			g2.drawImage(image, screenX + gp.tileSize / 2, screenY, size, size, null);
-			System.out.println(screenX + "\t" + screenY + "\t");
+			g2.drawImage(image, screenX - gp.tileSize / 2, screenY - gp.tileSize / 2, size, size, null);
 		}
-		//System.out.println(objectX + "\t" + objectY + "\t" + gp.player.worldX + "\t" + gp.player.worldY);
 	}
 	
 	public void update() {

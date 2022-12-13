@@ -100,7 +100,13 @@ public class GamePanel extends JPanel implements Runnable{
 			player.draw(g2);
 			obj[0].draw(g2);
 		}
-		obj[1].draw(g2);
+		if(player.worldY > obj[1].objectY) {
+			obj[1].draw(g2);
+			player.draw(g2);
+		} else {
+			player.draw(g2);
+			obj[1].draw(g2);
+		}
 		dial.draw(g2);
 		g2.dispose();
 	}

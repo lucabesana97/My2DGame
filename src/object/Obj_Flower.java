@@ -40,7 +40,7 @@ public class Obj_Flower extends SuperObject{
 					&& objectX <= frameCenterX + gp.player.screenX
 					&& objectY <= frameCenterY + gp.player.screenY
 					&& objectY >= frameCenterY - gp.player.screenY) {
-				g2.drawImage(image, screenX - gp.tileSize / 2, screenY - gp.tileSize / 2, gp.tileSize, gp.tileSize, null);
+				g2.drawImage(image, screenX, screenY, gp.tileSize/2, gp.tileSize/2, null);
 			}
 		}
 	}
@@ -55,7 +55,7 @@ public class Obj_Flower extends SuperObject{
 
 	public void update() {
 		super.update();
-		if(picked && distance(gp.player) >= gp.tileSize) {
+		if(picked && distance(gp.player) >= gp.tileSize / 2) {
 			objectX += (gp.player.worldX - objectX)/(gp.player.speed + 2);
 			objectY += (gp.player.worldY - objectY)/(gp.player.speed + 2);
 		}

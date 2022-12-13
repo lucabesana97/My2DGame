@@ -77,11 +77,10 @@ public class CollisionChecker {
 		}
 	}
 
-	/*public void checkObj(Entity tmp, String str) {
-		int entityCol;
+	public void checkObj(Entity tmp, String str) {
 		int corner_1, corner_2, side;
 		int objCorner_1, objCorner_2, objSide;
-
+		boolean checkC_1, checkC_2;
 		switch (str) {
 		case "up":
 			corner_1 = tmp.worldX + tmp.solidArea.x;
@@ -90,22 +89,29 @@ public class CollisionChecker {
 			objCorner_1 = gp.obj[1].objectX;
 			objCorner_2 = gp.obj[1].objectX + gp.obj[1].size;
 			objSide = gp.obj[1].objectY + gp.obj[1].size;
-			if(objCorner_1 >= corner_1 && objCorner_1 <= corner_2) {
-				if(side + tmp.speed <= objSide && side >= objSide){
+			checkC_1 = corner_1 >= objCorner_1 && corner_1 <= objCorner_2;
+			checkC_2 = corner_2 >= objCorner_1 && corner_2 <= objCorner_2;
+
+			if(checkC_1 || checkC_2){
+				if(side - tmp.speed <= objSide && side >= objSide){
 					tmp.collision_up = true;
 				}
 			}
 			break;
-		case "down": 
+		case "down":
 			corner_1 = tmp.worldX + tmp.solidArea.x;
 			corner_2 = corner_1 + tmp.solidArea.width;
-			side = tmp.worldY + tmp.solidArea.y + tmp.solidArea.height;
+			side = tmp.worldY + tmp.solidArea.y;
 			objCorner_1 = gp.obj[1].objectX;
 			objCorner_2 = gp.obj[1].objectX + gp.obj[1].size;
 			objSide = gp.obj[1].objectY;
-			if(objCorner_1 >= corner_1 && objCorner_1 <= corner_2) {
+			checkC_1 = corner_1 >= objCorner_1 && corner_1 <= objCorner_2;
+			checkC_2 = corner_2 >= objCorner_1 && corner_2 <= objCorner_2;
+
+			if(checkC_1 || checkC_2){
 				if(side + tmp.speed >= objSide && side <= objSide){
-					tmp.collision_up = true;
+					System.out.println("popo");
+					tmp.collision_down = true;
 				}
 			}
 			break;
@@ -116,43 +122,50 @@ public class CollisionChecker {
 			objCorner_1 = gp.obj[1].objectY;
 			objCorner_2 = gp.obj[1].objectY + gp.obj[1].size;
 			objSide = gp.obj[1].objectX + gp.obj[1].size;
-			if(objCorner_1 >= corner_1 && objCorner_1 <= corner_2) {
-				if(side + tmp.speed <= objSide && side >= objSide){
-					tmp.collision_up = true;
+			checkC_1 = corner_1 >= objCorner_1 && corner_1 <= objCorner_2;
+			checkC_2 = corner_2 >= objCorner_1 && corner_2 <= objCorner_2;
+
+			if(checkC_1 || checkC_2){
+				if(side - tmp.speed <= objSide && side >= objSide){
+					tmp.collision_left = true;
 				}
 			}
 			break;
-		case "right":  
+		case "right": 
 			corner_1 = tmp.worldY + tmp.solidArea.y;
 			corner_2 = corner_1 + tmp.solidArea.height;
-			side = tmp.worldX + tmp.solidArea.x + tmp.solidArea.width;
+			side = tmp.worldX + tmp.solidArea.x;
 			objCorner_1 = gp.obj[1].objectY;
 			objCorner_2 = gp.obj[1].objectY + gp.obj[1].size;
 			objSide = gp.obj[1].objectX;
-			if(objCorner_1 >= corner_1 && objCorner_1 <= corner_2) {
-				if(side + tmp.speed >= objSide && side <= objSide){
-					tmp.collision_up = true;
+			checkC_1 = corner_1 >= objCorner_1 && corner_1 <= objCorner_2;
+			checkC_2 = corner_2 >= objCorner_1 && corner_2 <= objCorner_2;
+
+			if(checkC_1 || checkC_2){
+				if(side + tmp.speed >= objSide - 10 && side <= objSide - 10){
+					System.out.println("popo");
+					tmp.collision_right = true;
 				}
 			}
 			break;
 
 		case "down_right":
-			checkTile(tmp, "right");
-			checkTile(tmp, "down");
+			checkObj(tmp, "right");
+			checkObj(tmp, "down");
 			break;
 		case "up_right":
-			checkTile(tmp, "right");
-			checkTile(tmp, "up");
+			checkObj(tmp, "right");
+			checkObj(tmp, "up");
 			break;
 		case "down_left":
-			checkTile(tmp, "left");
-			checkTile(tmp, "down");
+			checkObj(tmp, "left");
+			checkObj(tmp, "down");
 			break;
 		case "up_left":
-			checkTile(tmp, "up");
-			checkTile(tmp, "left");
+			checkObj(tmp, "up");
+			checkObj(tmp, "left");
 			break;
 		}
-	}*/
+	}
 }
 

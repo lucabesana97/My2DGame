@@ -15,7 +15,8 @@ public class Player extends Entity{
 
 	public final int screenX;
 	public final int screenY;
-
+	boolean keyO = false;
+	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
@@ -72,7 +73,7 @@ public class Player extends Entity{
 
 		setCollisionsOff();
 		gp.cCheck.checkTile(this, dir);
-		//gp.cCheck.checkObj(this, dir);
+		gp.cCheck.checkObj(this, dir);
 		
 		switch (dir) {
 		case "up": 
@@ -147,6 +148,12 @@ public class Player extends Entity{
 			}
 			spriteCounter = 0;
 		}
+		
+		if(keyH.getO() && !keyO) {
+			gp.dial.visible = !gp.dial.visible;
+		}
+		keyO = keyH.getO();
+		
 	}
 
 	public void draw(Graphics2D g2) {
